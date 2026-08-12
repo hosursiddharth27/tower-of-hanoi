@@ -1,0 +1,6 @@
+{
+  "appId": "com.siddharth.towerofhanoi",
+  "appName": "Tower of Hanoi",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

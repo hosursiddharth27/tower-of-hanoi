@@ -1,0 +1,33 @@
+{
+  "name": "towerofhanoi",
+  "version": "1.0.0",
+  "description": "A sleek, responsive, modern 2D Tower of Hanoi web game built with Vanilla JavaScript, HTML5, CSS3, and Web Audio API.",
+  "main": "script.js",
+  "scripts": {
+    "build": "node -e \"const fs = require('fs'); if (!fs.existsSync('www')) fs.mkdirSync('www'); fs.copyFileSync('index.html', 'www/index.html'); fs.copyFileSync('style.css', 'www/style.css'); fs.copyFileSync('script.js', 'www/script.js');\"",
+    "cap:sync": "npm run build && npx cap sync",
+    "cap:open": "npm run build && npx cap open android",
+    "apk:debug": "npm run build && npx cap sync && cd android && .\\gradlew.bat assembleDebug",
+    "aab:release": "npm run build && npx cap sync && cd android && .\\gradlew.bat bundleRelease"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hosursiddharth27/tower-of-hanoi.git"
+  },
+  "keywords": [
+    "tower-of-hanoi",
+    "puzzle-game",
+    "capacitor",
+    "android-game"
+  ],
+  "author": "hosursiddharth27",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@capacitor/android": "^7.4.4",
+    "@capacitor/core": "^7.4.4"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.4"
+  }
+}
