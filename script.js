@@ -60,19 +60,26 @@ let isRandomChallenge = false;
 let audioCtx = null;
 
 function getAudioContext() {
-    if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    try {
+        if (!audioCtx) {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return null;
+            audioCtx = new AudioCtx();
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume().catch(() => {});
+        }
+        return audioCtx;
+    } catch (e) {
+        return null;
     }
-    if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-    }
-    return audioCtx;
 }
 
 function playSound(type) {
-    if (!progressData.soundEnabled) return;
+    if (!progressData || !progressData.soundEnabled) return;
     try {
         const ctx = getAudioContext();
+        if (!ctx) return;
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.connect(gain);
@@ -114,20 +121,22 @@ function playSound(type) {
         } else if (type === 'win') {
             const notes = [523.25, 659.25, 783.99, 1046.50];
             notes.forEach((freq, i) => {
-                const noteOsc = ctx.createOscillator();
-                const noteGain = ctx.createGain();
-                noteOsc.connect(noteGain);
-                noteGain.connect(ctx.destination);
-                noteOsc.type = 'sine';
-                noteOsc.frequency.setValueAtTime(freq, now + i * 0.1);
-                noteGain.gain.setValueAtTime(0.2, now + i * 0.1);
-                noteGain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.1 + 0.3);
-                noteOsc.start(now + i * 0.1);
-                noteOsc.stop(now + i * 0.1 + 0.3);
+                try {
+                    const noteOsc = ctx.createOscillator();
+                    const noteGain = ctx.createGain();
+                    noteOsc.connect(noteGain);
+                    noteGain.connect(ctx.destination);
+                    noteOsc.type = 'sine';
+                    noteOsc.frequency.setValueAtTime(freq, now + i * 0.1);
+                    noteGain.gain.setValueAtTime(0.2, now + i * 0.1);
+                    noteGain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.1 + 0.25);
+                    noteOsc.start(now + i * 0.1);
+                    noteOsc.stop(now + i * 0.1 + 0.25);
+                } catch (err) {}
             });
         }
     } catch (e) {
-        console.error("Audio error:", e);
+        // Ignore audio error gracefully
     }
 }
 
