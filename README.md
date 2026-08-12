@@ -58,4 +58,6 @@ No installation or build steps required!
 
 ## 🌐 Live Demo
 
-Play the live version online: [https://tower-of-hanoi-nine-zeta.vercel.app](https://tower-of-hanoi-nine-zeta.vercel.app)
+Play the live game online:
+- **Primary Link**: [https://tower-of-hanoi-nine-zeta.vercel.app](https://tower-of-hanoi-nine-zeta.vercel.app)
+- **Secondary Link**: [https://tower-of-hanoi-topaz.vercel.app](https://tower-of-hanoi-topaz.vercel.app)
