@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">Tower of Hanoi</string>
     <string name="title_activity_main">Tower of Hanoi</string>
-    <string name="package_name">com.towerofhanoi.game</string>
-    <string name="custom_url_scheme">com.towerofhanoi.game</string>
+    <string name="package_name">com.siddharth.towerofhanoi</string>
+    <string name="custom_url_scheme">com.siddharth.towerofhanoi</string>
 </resources>

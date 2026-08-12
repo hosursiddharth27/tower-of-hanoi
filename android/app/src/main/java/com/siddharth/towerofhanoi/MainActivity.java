@@ -1,4 +1,4 @@
-package com.towerofhanoi.game;
+package com.siddharth.towerofhanoi;
 
 import com.getcapacitor.BridgeActivity;
 

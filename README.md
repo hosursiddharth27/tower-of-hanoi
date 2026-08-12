@@ -1,8 +1,21 @@
 # 🗼 Tower of Hanoi - Modern 2D Puzzle Game
 
-A sleek, responsive, modern 2D Tower of Hanoi web game built with Vanilla JavaScript, HTML5, CSS3, and Web Audio API. 
+[![Release](https://img.shields.io/github/v/release/hosursiddharth27/tower-of-hanoi?color=brightgreen&label=Android%20APK)](https://github.com/hosursiddharth27/tower-of-hanoi/releases/tag/v1.0.0)
+[![Live Demo](https://img.shields.io/badge/Live-Web%20Demo-blue)](https://tower-of-hanoi-nine-zeta.vercel.app)
+
+A sleek, responsive, modern 2D Tower of Hanoi game built with Vanilla JavaScript, HTML5, CSS3, and Web Audio API — available as both a **Web App** and **Native Android App (.apk)**!
 
 Features multi-puzzle disc challenges (3 to 15 discs), target customization (Tower B & C), optimal Auto-Solve demo mode with playback controls (1x to 10x speed), smooth disc movement transitions, star scoring system, and local storage persistence.
+
+---
+
+## 📱 Android App Download
+
+Download and install the official Android app directly on your phone:
+
+📥 **[Download Latest Android APK (v1.0.0)](https://github.com/hosursiddharth27/tower-of-hanoi/releases/download/v1.0.0/app-debug.apk)**
+
+Or visit the **[GitHub Releases Page](https://github.com/hosursiddharth27/tower-of-hanoi/releases/tag/v1.0.0)**.
 
 ---
 
@@ -28,6 +41,7 @@ Features multi-puzzle disc challenges (3 to 15 discs), target customization (Tow
 - **HTML5**: Semantic layout & Web Audio API integration.
 - **CSS3**: CSS Custom Properties (Themes), Glassmorphism styling, flexbox/grid layout, and smooth 2D transform transitions.
 - **JavaScript (ES6+)**: Module-free vanilla JS, drag-and-drop & touch pointer events, dynamic disc stack state engine, and non-blocking iterative Hanoi solver.
+- **Capacitor 7**: Cross-platform runtime powering the native Android app package.
 
 ---
 
@@ -46,11 +60,11 @@ Features multi-puzzle disc challenges (3 to 15 discs), target customization (Tow
 
 ## 🚀 Running Locally
 
-No installation or build steps required!
+No complex setup required!
 
-1. Clone or download this repository:
+1. Clone this repository:
    ```bash
-   git clone https://github.com/ASHRAF-ASH/tower-of-hanoi.git
+   git clone https://github.com/hosursiddharth27/tower-of-hanoi.git
    ```
 2. Open `index.html` directly in any web browser!
 
@@ -58,6 +72,7 @@ No installation or build steps required!
 
 ## 🌐 Live Demo
 
-Play the live game online:
+Play the live web game online:
 - **Primary Link**: [https://tower-of-hanoi-nine-zeta.vercel.app](https://tower-of-hanoi-nine-zeta.vercel.app)
 - **Secondary Link**: [https://tower-of-hanoi-topaz.vercel.app](https://tower-of-hanoi-topaz.vercel.app)
+
