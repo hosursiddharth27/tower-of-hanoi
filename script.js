@@ -1367,9 +1367,8 @@ function hideSplashScreen() {
     const splash = document.getElementById("splashScreen");
     if (splash) {
         splash.classList.add("fade-out");
-        setTimeout(() => {
-            splash.style.display = "none";
-        }, 400);
+        splash.style.pointerEvents = "none";
+        splash.style.display = "none";
     }
 }
 
@@ -1377,4 +1376,11 @@ function hideSplashScreen() {
 loadProgress();
 setupEventListeners();
 showScreen('homeScreen');
-setTimeout(hideSplashScreen, 350);
+
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    hideSplashScreen();
+} else {
+    window.addEventListener('DOMContentLoaded', hideSplashScreen);
+    window.addEventListener('load', hideSplashScreen);
+}
+setTimeout(hideSplashScreen, 300);
