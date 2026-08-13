@@ -16,8 +16,17 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    signingConfigs {
+        release {
+            storeFile file('release.keystore')
+            storePassword 'TowerOfHanoi2026SecretKey'
+            keyAlias 'releasekey'
+            keyPassword 'TowerOfHanoi2026SecretKey'
+        }
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
