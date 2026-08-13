@@ -477,6 +477,7 @@ function startRandomChallenge() {
 // ==========================================
 function drawGame() {
     const towerElements = document.querySelectorAll(".tower");
+    const isMobile = window.innerWidth <= 700;
 
     towerElements.forEach(towerElement => {
         const towerName = towerElement.dataset.tower;
@@ -485,9 +486,26 @@ function drawGame() {
 
         const stack = towers[towerName];
 
-        const isMobile = window.innerWidth <= 700;
-        const maxPoleHeight = isMobile ? 210 : 250;
-        const calcHeight = Math.max(13, Math.min(28, Math.floor((maxPoleHeight - discCount * 2) / discCount)));
+        const sampleTower = towerElement.querySelector(".tower-area") || towerElement;
+        let towerWidth = sampleTower ? sampleTower.clientWidth : 0;
+        let poleElement = towerElement.querySelector(".pole");
+        let poleHeight = poleElement ? poleElement.clientHeight : 0;
+
+        if (towerWidth <= 0) {
+            const boardEl = document.getElementById("board");
+            const boardW = boardEl && boardEl.clientWidth > 0 ? boardEl.clientWidth : (window.innerWidth - 24);
+            towerWidth = Math.floor((boardW - 24) / 3);
+        }
+
+        if (poleHeight <= 0) {
+            poleHeight = isMobile ? 180 : 250;
+        }
+
+        const calcHeight = Math.max(10, Math.min(26, Math.floor((poleHeight - (discCount * 2)) / (discCount + 1))));
+
+        // Dynamic disc scaling relative to actual usable tower width
+        const largestWidth = Math.max(48, Math.floor(towerWidth * 0.86));
+        const smallestWidth = Math.max(20, Math.floor(largestWidth * 0.28));
 
         stack.forEach((discSize, index) => {
             const discElement = document.createElement("div");
@@ -495,17 +513,15 @@ function drawGame() {
             discElement.dataset.disc = discSize;
             discElement.dataset.tower = towerName;
 
-            if (calcHeight >= 16) {
+            if (calcHeight >= 14) {
                 discElement.textContent = discSize;
             }
 
             discElement.style.height = `${calcHeight}px`;
-            if (calcHeight < 20) {
-                discElement.style.fontSize = `${Math.max(0.55, calcHeight * 0.045)}rem`;
+            if (calcHeight < 18) {
+                discElement.style.fontSize = `${Math.max(0.5, calcHeight * 0.05)}rem`;
             }
 
-            const smallestWidth = isMobile ? 38 : 52;
-            const largestWidth = isMobile ? 180 : 230;
             let width;
             if (discCount === 1) {
                 width = largestWidth;
@@ -513,7 +529,7 @@ function drawGame() {
                 width = smallestWidth + ((discSize - 1) / (discCount - 1)) * (largestWidth - smallestWidth);
             }
 
-            discElement.style.width = `${width}px`;
+            discElement.style.width = `${Math.floor(width)}px`;
 
             const hue = (200 + ((discSize - 1) * (360 / discCount))) % 360;
             discElement.style.background = `linear-gradient(135deg, hsl(${hue}, 85%, 60%), hsl(${(hue + 25) % 360}, 80%, 45%))`;

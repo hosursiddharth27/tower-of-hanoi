@@ -61,13 +61,14 @@
 
 body {
     min-height: 100vh;
+    min-height: 100dvh;
     font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: var(--bg-radial);
     color: var(--text-primary);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+    padding: max(8px, env(safe-area-inset-top, 8px)) max(8px, env(safe-area-inset-right, 8px)) max(8px, env(safe-area-inset-bottom, 8px)) max(8px, env(safe-area-inset-left, 8px));
     overflow-x: hidden;
     transition: background 0.3s ease;
 }
@@ -79,6 +80,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     pointer-events: none;
     z-index: 999;
 }
@@ -86,7 +88,6 @@ body {
 .app-container {
     width: 100%;
     max-width: 1000px;
-    min-height: 620px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -308,36 +309,36 @@ body {
 .level-badge {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid var(--card-border);
-    padding: 8px 16px;
-    border-radius: 14px;
+    padding: clamp(4px, 1.2vw, 8px) clamp(10px, 2.5vw, 16px);
+    border-radius: 12px;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: clamp(0.82rem, 2.6vw, 1.1rem);
 }
 
 .game-stats {
     display: flex;
-    gap: 10px;
+    gap: clamp(4px, 1.5vw, 10px);
 }
 
 .stat-box {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    padding: 6px 14px;
-    border-radius: 12px;
+    padding: clamp(3px, 1vw, 6px) clamp(6px, 1.8vw, 14px);
+    border-radius: 10px;
     text-align: center;
-    min-width: 80px;
+    min-width: clamp(48px, 12vw, 80px);
 }
 
 .stat-label {
     display: block;
-    font-size: 0.65rem;
+    font-size: clamp(0.55rem, 1.8vw, 0.65rem);
     font-weight: 700;
     color: var(--text-secondary);
     letter-spacing: 0.5px;
 }
 
 .stat-box strong {
-    font-size: 1.15rem;
+    font-size: clamp(0.82rem, 2.8vw, 1.15rem);
     color: var(--accent-blue);
     font-weight: 800;
 }
@@ -345,17 +346,18 @@ body {
 /* BOARD */
 .board {
     width: 100%;
-    height: 400px;
+    height: clamp(230px, 45vh, 400px);
     background: var(--card-bg);
     backdrop-filter: blur(16px);
     border: 1px solid var(--card-border);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    border-radius: 24px;
+    border-radius: clamp(14px, 3vw, 24px);
     display: flex;
     justify-content: space-around;
     align-items: stretch;
-    padding: 20px 15px;
-    gap: 12px;
+    padding: clamp(8px, 2vw, 20px) clamp(4px, 1vw, 15px);
+    gap: clamp(4px, 1.5vw, 12px);
+    touch-action: none;
 }
 
 .tower {
@@ -394,10 +396,10 @@ body {
 }
 
 .tower-label {
-    font-size: 1.1rem;
+    font-size: clamp(0.85rem, 2.8vw, 1.1rem);
     font-weight: 800;
     color: var(--text-secondary);
-    height: 35px;
+    height: clamp(24px, 5vh, 35px);
     display: flex;
     align-items: center;
 }
@@ -414,13 +416,13 @@ body {
 
 .pole {
     position: absolute;
-    bottom: 18px;
+    bottom: clamp(10px, 2vh, 18px);
     left: 50%;
     transform: translateX(-50%);
-    width: 14px;
-    height: 270px;
+    width: clamp(8px, 2.2vw, 14px);
+    height: calc(100% - clamp(20px, 4vh, 40px));
     background: var(--pole-color);
-    border-radius: 8px;
+    border-radius: 6px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
     pointer-events: none;
 }
@@ -428,18 +430,18 @@ body {
 .base {
     position: absolute;
     bottom: 0;
-    left: 8%;
-    width: 84%;
-    height: 18px;
+    left: 4%;
+    width: 92%;
+    height: clamp(10px, 2vh, 18px);
     background: var(--base-color);
-    border-radius: 9px;
+    border-radius: 6px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     pointer-events: none;
 }
 
 .discs-container {
     position: absolute;
-    bottom: 18px;
+    bottom: clamp(10px, 2vh, 18px);
     width: 100%;
     display: flex;
     flex-direction: column-reverse;
@@ -1154,27 +1156,34 @@ body {
 /* RESPONSIVE BREAKPOINTS (320px - 768px) */
 @media (max-width: 700px) {
     .home-content {
-        padding: 24px 16px;
+        padding: clamp(20px, 5vw, 32px) clamp(16px, 4vw, 24px);
+        gap: 20px;
     }
 
     .game-header {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 8px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 8px;
+    }
+
+    .header-left, .header-right {
+        gap: 6px;
     }
 
     .game-stats {
-        justify-content: space-around;
+        justify-content: flex-end;
         gap: 4px;
     }
 
     .stat-box {
-        padding: 4px 6px;
-        min-width: 50px;
+        padding: 3px 6px;
+        min-width: 48px;
     }
 
     .stat-label {
-        font-size: 0.6rem;
+        font-size: 0.55rem;
     }
 
     .stat-box strong {
@@ -1182,12 +1191,9 @@ body {
     }
 
     .board {
-        height: 320px;
-        padding: 10px 4px;
-    }
-
-    .pole {
-        height: 200px;
+        height: clamp(220px, 42vh, 320px);
+        padding: 8px 4px;
+        border-radius: 16px;
     }
 
     .disc-grid {
@@ -1196,44 +1202,82 @@ body {
     }
 
     .disc-card {
-        padding: 12px 8px;
+        padding: 10px 6px;
     }
 
     .disc-card .disc-title {
-        font-size: 1.05rem;
+        font-size: 0.95rem;
     }
 
     .puzzle-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-    }
-
-    .demo-playback-bar {
-        flex-direction: column;
-        gap: 10px;
-    }
-}
-
-@media (max-width: 380px) {
-    .board {
-        height: 280px;
-    }
-
-    .pole {
-        height: 170px;
+        gap: 8px;
     }
 
     .game-controls {
         gap: 6px;
+        margin-top: 8px;
     }
 
     .btn {
-        padding: 8px 12px;
-        font-size: 0.85rem;
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .demo-playback-bar {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 430px) {
+    .board {
+        height: clamp(200px, 40vh, 290px);
+    }
+
+    .game-logo .logo-icon {
+        font-size: 3rem;
+    }
+
+    .game-logo h1 {
+        font-size: 1.6rem;
     }
 
     .disc-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .btn-hero {
+        padding: 12px 20px;
+        font-size: 1.05rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .board {
+        height: clamp(180px, 38vh, 260px);
+        padding: 6px 2px;
+    }
+
+    .stat-box {
+        min-width: 40px;
+        padding: 2px 4px;
+    }
+
+    .stat-label {
+        font-size: 0.5rem;
+    }
+
+    .stat-box strong {
+        font-size: 0.75rem;
+    }
+
+    .btn {
+        padding: 5px 8px;
+        font-size: 0.75rem;
     }
 }
 
