@@ -4,11 +4,10 @@
   "description": "A sleek, responsive, modern 2D Tower of Hanoi web game built with Vanilla JavaScript, HTML5, CSS3, and Web Audio API.",
   "main": "script.js",
   "scripts": {
-    "build": "node -e \"const fs = require('fs'); if (!fs.existsSync('www')) fs.mkdirSync('www'); fs.copyFileSync('index.html', 'www/index.html'); fs.copyFileSync('style.css', 'www/style.css'); fs.copyFileSync('script.js', 'www/script.js');\"",
-    "cap:sync": "npm run build && npx cap sync",
-    "cap:open": "npm run build && npx cap open android",
-    "apk:debug": "npm run build && npx cap sync && cd android && .\\gradlew.bat assembleDebug",
-    "aab:release": "npm run build && npx cap sync && cd android && .\\gradlew.bat bundleRelease"
+    "build:www": "node -e \"const fs = require('fs'); if (!fs.existsSync('www')) fs.mkdirSync('www'); fs.copyFileSync('index.html', 'www/index.html'); fs.copyFileSync('style.css', 'www/style.css'); fs.copyFileSync('script.js', 'www/script.js');\"",
+    "cap:sync": "npm run build:www && npx cap sync",
+    "cap:open": "npm run build:www && npx cap open android",
+    "apk:debug": "npm run build:www && npx cap sync && cd android && .\\gradlew.bat assembleDebug"
   },
   "repository": {
     "type": "git",
